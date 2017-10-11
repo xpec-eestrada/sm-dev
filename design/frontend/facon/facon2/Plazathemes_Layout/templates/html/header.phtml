@@ -1,0 +1,140 @@
+<?php 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->get('Magento\Customer\Model\Session');
+$isLoggedIn = $customerSession->isLoggedIn();
+?>
+<?php $block->renderFileLessToCss(); ?>
+<header id="lucian_header123" class="header-container">
+	<div class="header-info-custom"><?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('header-info-custom-kappa')->toHtml(); ?></div>
+	<div class="header-top">
+		<div class="container-fluid">
+			<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('header_phone')->toHtml();?>
+			<div class="col-md-3 col-sm-6 col-xs-12 container-movil-menu">
+				<div class="logo-home">
+					<?php echo $this->getChildHtml("logo"); ?>
+				</div>
+			</div>
+			<div class="col-md-5 col-sm-6 col-xs-12">
+				<?php echo $this->getChildHtml("hozmegamenu_top"); ?>
+			</div>
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				<div class="header-content custom-search">
+					<div class="options-group" >
+						<?php echo $this->getChildHtml("top.search"); ?>
+					</div>
+				</div>
+				<div class="options-group carro-custom" >
+					<div class="setting-group hidden-sm hidden-xs " data-block="setting">
+						<div class="dynamic-links"><span><?php /* @escapeNotVerified */ echo __('Setting'); ?></span></div>
+						
+						<div class="link-lang-current" 
+						data-role="dropdownDialog"
+						data-mage-init='{"dropdownDialog":{
+						"appendTo":"[data-block=setting]",
+						"triggerTarget":".dynamic-links",
+						"timeout": "2000",
+						"closeOnMouseLeave": false,
+						"closeOnEscape": true,
+						"triggerClass":"active",
+						"parentClass":"active",
+						"buttons":[]}}'>
+						
+							<?php echo $this->getChildHtml("header.links"); ?>
+							<?php echo $this->getChildHtml("store_language"); ?>
+							<?php echo $this->getChildHtml("currency"); ?>
+						</div>
+					</div>
+					<?php echo $this->getChildHtml("minicart");?>
+				</div>
+				<div class="link-cuenta">
+					<?php
+						if(!$isLoggedIn){
+							echo '<a href="'.$block->getUrl('customer/account/').'" ><img src="/pub/media/xpec/mi-cuenta.png" title="Mi Cuenta" alt="Mi Cuenta" /><span>Mi Cuenta</span> </a>';
+						}else{
+							//echo '<a href="'.$block->getUrl('customer/account/logout').'" ><img src="/pub/media/xpec/mi-cuenta.png" title="Mi Cuenta" alt="Mi Cuenta" /><span>Salir</span> </a>';
+							echo '<img src="/pub/media/xpec/mi-cuenta.png" title="Mi Cuenta" alt="Mi Cuenta" /><a href="'.$block->getUrl('customer/account/').'">Hola, '.$customerSession->getCustomer()->getName().'&nbsp;&nbsp;</a> <a href="'.$block->getUrl('customer/account/logout').'" ><span>Salir</span> </a>';
+						}
+					?>
+					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<div class="header-content">
+		<div class="container-fluid">
+			<div class="row custom-row-header">
+				<div class="col-md-3 col-sm-4 col-xs-2">
+					<div class="mobile-bar-icon"><span><?php /* @escapeNotVerified */ echo __('mobile icon'); ?></span></div>
+					<div class="logo-home">
+						<!-- <?php echo $this->getChildHtml("logo"); ?> -->
+					</div>
+				</div>
+				<div class="col-xs-8 col-sm-4 col-movil-image">
+					<div class="logo-home">
+						<?php echo $this->getChildHtml("logo"); ?>
+					</div>
+				</div>
+				<div class="col-right col-md-9 col-sm-4 col-xs-12">
+					<div class="options-group" >
+						<!-- <?php echo $this->getChildHtml("top.search"); ?> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mobile-bar-content">
+			<div class ="mobile-bar-close"><?php /* @escapeNotVerified */ echo __('Close'); ?></div>
+			<div class="content-inner">	
+				<ul class = "tabs-mobile">
+					<li class="item item-menu"><?php /* @escapeNotVerified */ echo __('Menu'); ?></li>
+					<li class="item item-account"><?php /* @escapeNotVerified */ echo __('Account'); ?></li>
+					<li class="item item-setting"><?php /* @escapeNotVerified */ echo __('Setting'); ?></li>
+				</ul>
+				<div class="tabs-content-mobile tabs-menu">
+					<?php echo $this->getChildHtml("mobilemenu"); ?>
+				</div>
+				<div class="tabs-content-mobile tabs-account" style="display:none;">
+					<?php echo $this->getChildHtml("header.links"); ?>
+				</div>
+				<div class="tabs-content-mobile tabs-setting" style="display:none;">
+					<?php echo $this->getChildHtml("store_language_mobile"); ?>
+					<?php echo $this->getChildHtml("currency_mobile"); ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<script type="text/javascript">
+require(["jquery"], function($){
+	$(document).ready(function(){
+		<!-- show, hide mobile bar content -->
+		$(".mobile-bar-icon").click(function(){
+			$(".mobile-bar-content").addClass("open");
+		});
+		$(".mobile-bar-close").click(function(){
+			$(".mobile-bar-content").removeClass("open");
+		});
+		
+		<!-- choose tabs-->
+		$(".tabs-mobile .item-menu").addClass("active");
+		$(".tabs-mobile .item").click(function(){
+			$(".tabs-mobile .item").removeClass("active");
+			$(this).addClass("active");
+		});
+		$(".tabs-mobile .item-menu").click(function(){
+			$(".tabs-content-mobile").css("display","none");
+			$(".tabs-menu").css("display","block");
+		});
+		$(".tabs-mobile .item-account").click(function(){
+			$(".tabs-content-mobile").css("display","none");
+			$(".tabs-account").css("display","block");
+		});
+		$(".tabs-mobile .item-setting").click(function(){
+			$(".tabs-content-mobile").css("display","none");
+			$(".tabs-setting").css("display","block");
+		});
+		
+	});
+});
+</script>
+

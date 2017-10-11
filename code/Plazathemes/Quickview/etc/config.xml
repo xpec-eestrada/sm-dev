@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 PlazaThemes.com. All rights reserved.
+ *
+ * @author PlazaThemes Team <contact@plazathemes.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <quickview>
+            <general>
+                <enabled>1</enabled>
+				<quickview_init>a:9:{s:17:"_1457919154094_94";a:4:{s:9:"container";s:19:"#new_product_slider";s:4:"item";s:11:".item-inner";s:7:"element";s:8:".actions";s:4:"link";s:19:".product-item-photo";}s:18:"_1457938402778_778";a:4:{s:9:"container";s:35:".bestsellerproduct_container_slider";s:4:"item";s:11:".item-inner";s:7:"element";s:8:".actions";s:4:"link";s:19:".product-item-photo";}s:18:"_1458006433515_515";a:4:{s:9:"container";s:33:".category-products .products-grid";s:4:"item";s:11:".item-inner";s:7:"element";s:8:".actions";s:4:"link";s:19:".product-item-photo";}s:18:"_1458290975490_490";a:4:{s:9:"container";s:22:".categorytab-container";s:4:"item";s:11:".item-inner";s:7:"element";s:8:".actions";s:4:"link";s:19:".product-item-photo";}s:17:"_1459311900036_36";a:4:{s:9:"container";s:8:".related";s:4:"item";s:11:".item-inner";s:7:"element";s:8:".actions";s:4:"link";s:19:".product-item-photo";}s:18:"_1459312025632_632";a:4:{s:9:"container";s:7:".upsell";s:4:"item";s:11:".item-inner";s:7:"element";s:8:".actions";s:4:"link";s:19:".product-item-photo";}s:17:"_1460429791070_70";a:4:{s:9:"container";s:10:".crosssell";s:4:"item";s:11:".item-inner";s:7:"element";s:8:".actions";s:4:"link";s:19:".product-item-photo";}s:18:"_1463109207779_779";a:4:{s:9:"container";s:31:".onsaleproduct_container_slider";s:4:"item";s:11:".item-inner";s:7:"element";s:8:".actions";s:4:"link";s:19:".product-item-photo";}s:18:"_1463196964103_103";a:4:{s:9:"container";s:27:".pt-recentproduct-container";s:4:"item";s:11:".item-inner";s:7:"element";s:8:".actions";s:4:"link";s:19:".product-item-photo";}}</quickview_init>
+                <loading_image>default/ajax-loader.gif</loading_image>
+                <insertion>after</insertion>
+            </general>
+        </quickview>
+    </default>
+</config>

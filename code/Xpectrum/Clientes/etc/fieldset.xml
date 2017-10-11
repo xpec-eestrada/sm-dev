@@ -1,0 +1,21 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="DataObject/etc/fieldset.xsd">
+   <scope id="global">        
+       <fieldset id="customer_address">
+           <field name="cmbregion">
+               <aspect name="create" />
+               <aspect name="update" />
+               <aspect name="to_order" />
+           </field>
+           <field name="cmbprovincias">
+               <aspect name="create" />
+               <aspect name="update" />
+               <aspect name="to_order" />
+           </field>
+           <field name="cmbcomunas">
+               <aspect name="create" />
+               <aspect name="update" />
+               <aspect name="to_order" />
+           </field>
+       </fieldset>
+   </scope>
+</config>

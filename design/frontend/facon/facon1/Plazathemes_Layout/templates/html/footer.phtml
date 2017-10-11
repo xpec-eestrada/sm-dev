@@ -1,0 +1,79 @@
+<footer class="footer-container">
+	
+	<div class="footer-top">
+		<div class="container">
+			<?php echo $this->getChildHtml('footer_static')?>
+			
+		</div>
+	</div>
+	<div class="container footer-bottom-custom">
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						   <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer-derechos')->toHtml(); ?>
+					</div>
+					<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<?php echo $this->getChildHtml('footer_payment')?>
+					</div> -->
+				</div>
+				<div id="back_top">
+					<a href="#back-top"><span><?php /* @escapeNotVerified */ echo __('top'); ?></span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</footer>
+<script type="text/javascript">
+			
+	require(["jquery"], function($){
+
+	   $(window).scroll(function() {
+			if($(this).scrollTop() > 300) {
+				$('#back_top').fadeIn();   
+			} else {
+				$('#back_top').fadeOut();
+			}
+		});
+		   $('#back_top').click(function() {
+			$('body,html').animate({scrollTop:0},500);
+		});
+
+		$('.evt-footer-mov').click(function(){
+			if($(window).width()<=767){
+				$(this).toggleClass('active');
+				$(this).next().slideToggle();
+				$(this).parent().toggleClass('paddingbottom');
+			}
+		});
+	   
+	});
+
+
+	require([
+	  "jquery",
+	  "owlcarousel/minjs"
+	 ], function($,owlCarousel){
+
+		$(document).ready(function(){
+			$('.loadpatrocinio').css({'display':'none'});
+			$('.owl-carousel-patrocinios').removeClass('displaynone');
+			$(".owl-carousel-patrocinios").owlCarousel({
+				autoPlay : 3000,
+				slideSpeed : 4000,
+				items : 6,
+				itemsDesktop : [1199,4],
+				itemsDesktopSmall : [992,3],
+				itemsTablet: [767,2],
+				itemsMobile : [479,1]
+			});
+			var height=$('.owl-carousel-patrocinios').find('.owl-wrapper').height();
+			$('.owl-carousel-patrocinios').find('.owl-item').each(function(index,elemento){
+				var altoitem=$(elemento).height();
+				var dif=(height-altoitem)/2;
+				$(elemento).css({'margin-top':dif});
+			});
+		});
+	});
+</script>

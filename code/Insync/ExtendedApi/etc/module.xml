@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento2.0-APP-v3.2.1.0-24-Nov2016
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
+	<module name="Insync_ExtendedApi" setup_version="0.0.1" schema_version="0.0.1">
+    </module>
+</config>

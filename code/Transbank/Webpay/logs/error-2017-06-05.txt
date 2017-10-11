@@ -1,0 +1,1 @@
+19:00:47 - Error - Warning: openssl_x509_read(): supplied parameter cannot be coerced into an X509 certificate! in /home/sm-dev/public_html/app/code/Transbank/Webpay/lib/libwebpay/soap/xmlseclibs.php on line 397

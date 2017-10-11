@@ -1,0 +1,29 @@
+/*div[name="shippingAddress.postcode"]{
+    display:none;
+}*/
+div[name="shippingAddress.country_id"]{
+    display:none;
+}
+.load-background-xpec{
+    background-color: rgba(0,0,0,0.35);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    position: fixed;
+    z-index: 900;
+}
+.load-xpec{
+    position: fixed;
+    left: 50%;
+    top:50%;
+    -ms-transform: translate(-50%,-50%);
+    -moz-transform:translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    z-index: 901;
+}
+.checkout-index-index .opc-block-summary .totals-tax{
+    display: none;
+}

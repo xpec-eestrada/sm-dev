@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="Xpectrum_Clientes::js/xpecvalidarform.js"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Customer\Block\Form\Register" name="customer_form_register" template="Xpectrum_Clientes::form/register.phtml">
+                <container name="form.additional.info" as="form_additional_info"/>
+                <container name="customer.form.register.fields.before" as="form_fields_before" label="Form Fields Before" htmlTag="div" htmlClass="customer-form-before"/>
+            </block>
+            <block class="Magento\Cookie\Block\RequireCookie" name="require-cookie" template="Magento_Cookie::require_cookie.phtml">
+                <arguments>
+                    <argument name="triggers" xsi:type="array">
+                        <item name="registerSubmitButton" xsi:type="string">.action.submit</item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="form.additional.info">
+            <block class="Magento\Framework\View\Element\Template" name="form_additional_info_customer" template="Xpectrum_Clientes::additionalinfocustomer.phtml" cacheable="false" />
+        </referenceContainer>
+        <referenceBlock name="form.additional.info" remove="true"/>
+        <referenceBlock name="attribute_customer_register" remove="true"/>
+    </body>
+</page>

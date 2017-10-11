@@ -1,0 +1,23 @@
+Array
+(
+    [Orden] => Array
+        (
+            [description] => Web Pay
+            [paymenCodeResult] => Venta Cr&eacute;dito
+            [date_accepted] => 2017-06-17T01:49:38.965-04:00
+            [buyOrder] => 000000142
+            [authorizationCode] => 1213
+            [cardNumber] => 6623
+            [amount] => 10034
+            [sharesNumber] => 0
+            [detalle] => Array
+                (
+                    [tipopago] => Cr&eacute;dito
+                    [tipocuotas] => Sin Cuotas
+                    [numcuotas] => 0
+                )
+
+        )
+
+)
+

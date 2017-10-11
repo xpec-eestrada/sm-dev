@@ -1,0 +1,247 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+$defaultprov='Seleccione una Provincia';
+$defaultcom='Seleccione una Comuna';
+?>
+<?php
+/**
+ * Edit customer address template
+ *
+ * @var $block \Magento\Customer\Block\Address\Edit
+ */
+?>
+<form class="form-address-edit" action="<?php /* @escapeNotVerified */ echo $block->getSaveUrl() ?>" method="post" id="form-validate" enctype="multipart/form-data" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
+    
+    <fieldset class="fieldset">
+        <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('Contact Information') ?></span></legend><br>
+        <?php echo $block->getBlockHtml('formkey')?>
+        <input type="hidden" name="success_url" value="<?php /* @escapeNotVerified */ echo $block->getSuccessUrl() ?>">
+        <input type="hidden" name="error_url" value="<?php /* @escapeNotVerified */ echo $block->getErrorUrl() ?>">
+        <input type="hidden" name="entidad_id" id="entidad_id" value="<?php echo $block->getCustomerId(); ?>" />
+        <input type="hidden" name="address_id" id="address_id" value="<?php echo $block->getDireccionId(); ?>" />
+        <input type="hidden" name="ciudad" id="ciudad" value="" />
+        <?php echo $block->getNameBlockHtml() ?>
+        <!--<div class="field rut required">
+            <label class="label" for="rut"><span><?php /* @escapeNotVerified */ echo __('Rut') ?></span></label>
+            <div class="control">
+                <input type="text" name="rut" id="rut" title="<?php /* @escapeNotVerified */ echo __('Rut') ?>" value="<?php echo $block->escapeHtml($block->getAddress()->getCompany()) ?>" class="input-text <?php /* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('company') ?>">
+            </div>
+        </div>-->
+        <div class="field telephone required">
+            <label class="label" for="telephone"><span><?php /* @escapeNotVerified */ echo __('Phone Number') ?></span></label>
+            <div class="control">
+                <input type="text" name="telephone" value="<?php echo $block->escapeHtml($block->getAddress()->getTelephone()) ?>" title="<?php /* @escapeNotVerified */ echo __('Phone Number') ?>" class="input-text <?php /* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('telephone') ?>" id="telephone">
+            </div>
+        </div>
+        <!--<div class="field sexo required">
+            <label class="label" for="sexo"><span><?php /* @escapeNotVerified */ echo __('Sexo') ?></span></label>
+            <div class="control">
+                <input type="radio" style="margin:0px" name="sexo" value="M" checked> Sr &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" style="margin:0px" name="sexo" value="F"> Sra
+            </div>
+        </div>
+        <div class="field nacimiento required">
+            <label class="label" for="nacimiento"><span><?php /* @escapeNotVerified */ echo __('Fecha de Nacimiento') ?></span></label>
+            <div class="control">
+                <select name="dia" style="width:30%;">
+                    <?php
+                        for($i=1;$i<=31;$i++){
+                            echo "<option value=".$i.">".$i."</option>";
+                        }
+                    ?>
+                </select>
+                <select name="mes" style="width:30%;">
+                    <option value="1">Enero</option>
+                    <option value="2">Febrero</option>
+                    <option value="3">Marzo</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Mayo</option>
+                    <option value="6">Junio</option>
+                    <option value="7">Julio</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+                <select name="anio" style="width:30%;">
+                    <?php
+                        for($i=date("Y");$i>=(date("Y")-80);$i--){
+                            echo "<option value=".$i.">".$i."</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+        </div>-->
+    </fieldset>
+    <fieldset class="fieldset">
+        <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('Address') ?></span></legend><br>
+        <?php $_streetValidationClass = $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('street'); ?>
+        <div class="field street required">
+            <label for="street_1" class="label"><span><?php /* @escapeNotVerified */ echo __('Street Address') ?></span></label>
+            <div class="control">
+                <input type="text" name="street[]" value="<?php echo $block->escapeHtml($block->getStreetLine(1)) ?>" title="<?php /* @escapeNotVerified */ echo __('Street Address') ?>" id="street_1" class="input-text <?php /* @escapeNotVerified */ echo $_streetValidationClass ?>"  />
+                <div class="nested">
+                    <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
+                    <?php for ($_i = 1, $_n = $this->helper('Magento\Customer\Helper\Address')->getStreetLines(); $_i < $_n; $_i++): ?>
+                        <div class="field additional">
+                            <label class="label" for="street_<?php /* @escapeNotVerified */ echo $_i+1 ?>">
+                                <span><?php /* @escapeNotVerified */ echo __('Street Address %1', $_i+1) ?></span>
+                            </label>
+                            <div class="control">
+                                <input type="text" name="street[]" value="<?php echo $block->escapeHtml($block->getStreetLine($_i+1)) ?>" title="<?php /* @escapeNotVerified */ echo __('Street Address %1', $_i+1) ?>" id="street_<?php /* @escapeNotVerified */ echo $_i+1 ?>" class="input-text <?php /* @escapeNotVerified */ echo $_streetValidationClass ?>">
+                            </div>
+                        </div>
+                    <?php endfor; ?>
+                </div>
+            </div>
+        </div>
+
+        <?php if ($this->helper('Magento\Customer\Helper\Address')->isVatAttributeVisible()) : ?>
+            <div class="field taxvat">
+                <label class="label" for="vat_id"><span><?php /* @escapeNotVerified */ echo __('VAT Number') ?></span></label>
+                <div class="control">
+                    <input type="text" name="vat_id" value="<?php echo $block->escapeHtml($block->getAddress()->getVatId()) ?>" title="<?php /* @escapeNotVerified */ echo __('VAT Number') ?>" class="input-text <?php /* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('vat_id') ?>" id="vat_id">
+                </div>
+            </div>
+        <?php endif; ?>
+        
+        <div class="field region required">
+            <label class="label" for="region_id"><span><?php /* @escapeNotVerified */ echo __('Región') ?></span></label>
+            <input type="hidden" name="id_attribute_region" value="<?php echo $block->getIdAttributeRegion(); ?>" />
+            <div class="control">
+                <select id="region_id" name="region_id" title="<?php /* @escapeNotVerified */ echo __('Region') ?>" class="validate-select">
+                    <?php 
+                        echo $block->getOptionRegiones();
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="field provincia required">
+            <label class="label" for="provincia_id"><span><?php /* @escapeNotVerified */ echo __('Provincia') ?></span></label>
+            <input type="hidden" name="id_attribute_provincia" value="<?php echo $block->getIdAttributeProvincia(); ?>" />
+            <div class="control">
+                <select id="provincia_id" name="provincia_id" title="<?php /* @escapeNotVerified */ echo __('Provincia') ?>" class="validate-select" <?php echo(!$block->getConfig('general/region/display_all')) ? ' disabled="disabled"' : '';?>>
+                    <?php echo $block->getOptionProvincias(); ?>
+                    
+                </select>
+            </div>
+        </div>
+
+        <div class="field comuna required">
+            <label class="label" for="comuna"><span><?php /* @escapeNotVerified */ echo __('Comuna') ?></span></label>
+            <input type="hidden" name="id_attribute_comuna" value="<?php echo $block->getIdAttributeComunas(); ?>" />
+            <div class="control">
+                <select id="comuna_id" name="comuna_id" title="<?php /* @escapeNotVerified */ echo __('Comuna') ?>" class="validate-select" <?php echo(!$block->getConfig('general/region/display_all')) ? ' disabled="disabled"' : '';?>>
+                    <?php echo $block->getOptionComunas(); ?>
+                </select>
+            </div>
+        </div>
+
+        <?php if ($block->isDefaultBilling()): ?>
+            <div class="message info"><?php /* @escapeNotVerified */ echo __("It's a default billing address.") ?></div>
+        <?php elseif ($block->canSetAsDefaultBilling()): ?>
+            <div class="field choice set billing">
+                <input type="checkbox" id="primary_billing" name="default_billing" value="1" class="checkbox">
+                <label class="label" for="primary_billing"><span><?php /* @escapeNotVerified */ echo __('Use as my default billing address') ?></span></label>
+            </div>
+        <?php else: ?>
+            <input type="hidden" name="default_billing" value="1" />
+        <?php endif; ?>
+
+        <?php if ($block->isDefaultShipping()): ?>
+            <div class="message info"><?php /* @escapeNotVerified */ echo __("It's a default shipping address.") ?></div>
+        <?php elseif ($block->canSetAsDefaultShipping()): ?>
+            <div class="field choice set shipping">
+                <input type="checkbox" id="primary_shipping" name="default_shipping" value="1" class="checkbox">
+                <label class="label" for="primary_shipping"><span><?php /* @escapeNotVerified */ echo __('Use as my default shipping address') ?></span></label>
+            </div>
+        <?php else: ?>
+            <input type="hidden" name="default_shipping" value="1">
+        <?php endif; ?>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action save primary" data-action="save-address" title="<?php /* @escapeNotVerified */ echo __('Save Address') ?>">
+                <span><?php /* @escapeNotVerified */ echo __('Save Address') ?></span>
+            </button>
+        </div>
+        <div class="secondary">
+            <a class="action back" href="<?php echo $block->escapeUrl($block->getBackUrl()) ?>"><span><?php /* @escapeNotVerified */ echo __('Go back') ?></span></a>
+        </div>
+    </div>
+</form>
+<script type="text/x-magento-init">
+    {
+        "#form-validate": {
+            "validation": {}
+        },
+        "#country": {
+            "regionUpdater": {
+                "optionalRegionAllowed": <?php /* @escapeNotVerified */ echo($block->getConfig('general/region/display_all') ? 'true' : 'false'); ?>,
+                "regionListId": "#region_id",
+                "regionInputId": "#region",
+                "postcodeId": "#zip",
+                "form": "#form-validate",
+                "regionJson": <?php /* @escapeNotVerified */ echo $this->helper('Magento\Directory\Helper\Data')->getRegionJson() ?>,
+                "defaultRegion": "<?php /* @escapeNotVerified */ echo $block->getRegionId() ?>",
+                "countriesWithOptionalZip": <?php /* @escapeNotVerified */ echo $this->helper('Magento\Directory\Helper\Data')->getCountriesWithOptionalZip(true) ?>
+            }
+        }
+    }
+</script>
+<script >
+    require([
+        'jquery',
+        'jquery/ui'
+        ], function ($) {
+            'use strict';
+            $(document).on('change','#region_id',function() {
+                $.ajax({
+                    url: '<?php echo $block->getUrlAjax(); ?>',
+                    data: {
+                        id_region:$("#region_id").val()
+                    },
+                    type: "POST",
+                    dataType: 'json'
+                }).done(function (data) {
+                    var items="<option value=''><?php echo $defaultprov; ?></option>";
+                    if(data.result.length){
+                        $.each(data.result,function(index,item){
+                            items=items+"<option value='"+item.provincia_id+"'>"+item.provincia_nombre+"</option>";
+                        });
+                    }
+                    $("#provincia_id").html(items);
+                    $("#comuna_id").html("<option value=''><?php echo $defaultcom; ?></option>");
+                });
+            });
+            $(document).on('change','#provincia_id',function() {
+                $.ajax({
+                    url: '<?php echo $block->getUrlAjaxComunas(); ?>',
+                    data: {
+                        id_region:$("#region_id").val(),
+                        id_provincia:$("#provincia_id").val()
+                    },
+                    type: "POST",
+                    dataType: 'json'
+                }).done(function (data) {
+                    var items="<option value=''><?php echo $defaultcom; ?></option>";
+                    if(data.result.length){
+                        $.each(data.result,function(index,item){
+                            items=items+"<option value='"+item.comunas_id+"'>"+item.comunas_nombre+"</option>";
+                        });
+                    }
+                    $("#comuna_id").html(items);
+                });
+            });
+            $(".form-address-edit").submit(function( event ) {
+                $("#comuna_id option:selected").text();
+                $("#ciudad").val($("#comuna_id option:selected").text());
+                //event.preventDefault();
+            });
+    });
+</script>

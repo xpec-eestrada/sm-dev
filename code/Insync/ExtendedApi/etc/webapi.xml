@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/aecInvoices" method="POST">
+        <service class="Insync\ExtendedApi\Api\InvoiceRepositoryInterface" method="save"/>
+        <resources>
+             <resource ref="Magento_Sales::sales" />
+        </resources>
+    </route>
+    
+     <route url="/V1/aecInvoices/:id" method="GET">
+        <service class="Insync\ExtendedApi\Api\InvoiceRepositoryInterface" method="get"/>
+        <resources>
+             <resource ref="Magento_Sales::sales" />
+        </resources>
+    </route>
+    
+    <route url="/V1/aecShipments" method="POST">
+        <service class="Insync\ExtendedApi\Api\ShipmentRepositoryInterface" method="save"/>
+        <resources>
+             <resource ref="Magento_Sales::sales" />
+        </resources>
+    </route>
+    
+     <route url="/V1/aecShipments/:id" method="GET">
+        <service class="Insync\ExtendedApi\Api\ShipmentRepositoryInterface" method="get"/>
+        <resources>
+             <resource ref="Magento_Sales::sales" />
+        </resources>
+    </route>
+</routes>
