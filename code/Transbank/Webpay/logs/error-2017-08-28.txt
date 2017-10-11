@@ -1,0 +1,12 @@
+14:46:10 - Error - JDBC exception on Hibernate data access: SQLException for SQL [n/a]; SQL state [72000]; error code [1653]; ORA-01653: unable to extend table WEBPAY.TRANSACTIONS by 8192 in tablespace USERS
+; nested exception is org.hibernate.QueryTimeoutException: ORA-01653: unable to extend table WEBPAY.TRANSACTIONS by 8192 in tablespace USERS
+
+17:46:44 - Error - JDBC exception on Hibernate data access: SQLException for SQL [n/a]; SQL state [72000]; error code [1653]; ORA-01653: unable to extend table WEBPAY.TRANSACTIONS by 8192 in tablespace USERS
+; nested exception is org.hibernate.QueryTimeoutException: ORA-01653: unable to extend table WEBPAY.TRANSACTIONS by 8192 in tablespace USERS
+
+17:57:17 - Error - JDBC exception on Hibernate data access: SQLException for SQL [n/a]; SQL state [72000]; error code [1653]; ORA-01653: unable to extend table WEBPAY.TRANSACTIONS by 8192 in tablespace USERS
+; nested exception is org.hibernate.QueryTimeoutException: ORA-01653: unable to extend table WEBPAY.TRANSACTIONS by 8192 in tablespace USERS
+
+23:07:12 - Error - JDBC exception on Hibernate data access: SQLException for SQL [n/a]; SQL state [72000]; error code [1653]; ORA-01653: unable to extend table WEBPAY.TRANSACTIONS by 8192 in tablespace USERS
+; nested exception is org.hibernate.QueryTimeoutException: ORA-01653: unable to extend table WEBPAY.TRANSACTIONS by 8192 in tablespace USERS
+

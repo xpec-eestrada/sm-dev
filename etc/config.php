@@ -2,7 +2,6 @@
 return array (
   'modules' => 
   array (
-    'Amasty_Base' => 1,
     'Magento_Store' => 1,
     'Insync_ExtendedApi' => 1,
     'Magento_Directory' => 1,
@@ -125,7 +124,6 @@ return array (
     'Magento_SalesSampleData' => 1,
     'Magento_CatalogWidget' => 1,
     'Magento_WidgetSampleData' => 1,
-    'Amasty_CustomerAttributes' => 0,
     'Magento_WishlistSampleData' => 1,
     'Plazathemes_Bannerslider' => 1,
     'Plazathemes_Blog' => 1,
