@@ -151,10 +151,9 @@ class WebPayNormal
             $wsTransactionDetail = new wsTransactionDetail();
             $detailArray = array();
             $wsInitTransactionInput->wSTransactionType = $tipotrans;
-             $arraydefi['wSTransactionType']=$tipotrans;
+            $arraydefi['wSTransactionType']=$tipotrans;
             $wsInitTransactionInput->commerceId = $this->config->getParam("CODIGO_MALL");
             $arraydefi['commerceId']=$this->config->getParam("CODIGO_MALL");
-            //$wsInitTransactionInput->commerceId = 597020000542;
             $wsInitTransactionInput->buyOrder = $ordenCompra;
             $arraydefi['buyOrder']=$ordenCompra;
             $wsInitTransactionInput->sessionId = $sessionId;
@@ -168,7 +167,6 @@ class WebPayNormal
             /*Primera tienda*/
             $wsTransactionDetail->commerceCode = $this->config->getParam("CODIGO_COMERCIO");
             $arraydetalle['commerceCode']=$this->config->getParam("CODIGO_COMERCIO");
-            //$wsTransactionDetail->commerceCode = 597020000543;
             $wsTransactionDetail->buyOrder = $ordenCompra;
             $arraydetalle['buyOrder']=$ordenCompra;
             $wsTransactionDetail->amount = $amount;
@@ -180,15 +178,6 @@ class WebPayNormal
             
             /*Se agrega al arreglo de tiendas*/
             $detailArray[0] = $wsTransactionDetail;
-            //$wsTransactionDetail = new wsTransactionDetail();
-            
-            /*Segunda tienda*/
-            /*$wsTransactionDetail->commerceCode = “597026000022”;
-            $wsTransactionDetail->buyOrder = $ordenCompra;
-            $wsTransactionDetail->amount = $amount;*/
-            
-            /*Se agrega al arreglo de tiendas*/
-            //$detailArray[1] = $wsTransactionDetail;
             $wsInitTransactionInput->transactionDetails = $detailArray;
             $endpoint = $urlFinal;
             $initTransactionResponse = $this->_initTransaction(
@@ -207,7 +196,6 @@ class WebPayNormal
                 $tokenWebpay = $wsInitTransactionOutput->token;
                 /*URL donde se debe continuar el flujo*/
                 $urlRedirect = $wsInitTransactionOutput->url;
-
                 return array ( 
                     "url" => $urlRedirect,
                     "token_ws" => $tokenWebpay
