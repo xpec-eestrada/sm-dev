@@ -9,4 +9,12 @@
     <head>
         <css  src="Xpectrum_Clientes::css/xpec-css.css"/>
     </head>
+    <body>
+        <referenceBlock class="Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Cart" name="customer.wishlist.item.cart" template="Xpectrum_Clientes::item/column/cart.phtml" cacheable="false">
+            <arguments>
+                <argument name="title" translate="true" xsi:type="string">Add to Cart</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+    
 </page>
