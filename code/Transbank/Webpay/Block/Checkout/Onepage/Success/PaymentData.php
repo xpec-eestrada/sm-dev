@@ -7,6 +7,7 @@ class PaymentData extends \Magento\Framework\View\Element\Template
      * @var \Magento\Checkout\Model\Session
      */
     protected $checkoutSession;
+    private $_paidResult;
     
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -21,15 +22,17 @@ class PaymentData extends \Magento\Framework\View\Element\Template
     protected function _toHtml()
     {
         $result = $this->checkoutSession->getHasPaidResult();
-
-        if (isset($result)) {
-            
-            $this->checkoutSession->unsHasPaidResult();
-            
-        } else {
-            
+        $this->_paidResult = $result;
+        
+        if (!isset($result)) {
             $result = 0;
         }
+        
+        /*if (isset($result)) {
+            $this->checkoutSession->unsHasPaidResult();
+        } else {            
+            $result = 0;
+        }*/
         
         $this->addData(
             [
