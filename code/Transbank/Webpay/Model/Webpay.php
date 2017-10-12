@@ -213,12 +213,12 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
         $order = $objectManager->create('Magento\Sales\Model\Order')->loadByIncrementId($result->buyOrder);
         $detorden=$this->obtenerDetalleOrden($order->getId());
 
-	try {
-             $emailSender = $objectManager->create('\Magento\Sales\Model\Order\Email\Sender\OrderSender');
-             $emailSender->send($order);
-         } catch (\Exception $e) {
-             //$this->_logger->critical($e);
-         }
+	    try {
+            $emailSender = $objectManager->create('\Magento\Sales\Model\Order\Email\Sender\OrderSender');
+            $emailSender->send($order);
+        } catch (\Exception $e) {
+            //$this->_logger->critical($e);
+        }
 
         $payResult = array(
             'description' => $this->title,
