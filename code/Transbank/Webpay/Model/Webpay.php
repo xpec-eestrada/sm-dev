@@ -43,8 +43,6 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
 
     private $_accesToken;
 
-    private $_detallepagoFactory;
-
     public function __construct(
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -56,10 +54,9 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Payment\Model\Method\Logger $logger,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,      
         array $data = []
     ){
-        //$this->_detallepagoFactory=$DetallepagoFactory;
         parent::__construct(
             $context,
             $registry,
@@ -168,7 +165,6 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
         $tipoPagotildada='';
         $tipoCuotas='';
         $numeroCuotas='';
-        $attribadd='';
         switch($paymentTypeCode){
             case 'VD':
                 $tipoPago='D&eacute;bito';
@@ -188,7 +184,7 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
                 $tipoCuotas='Cuotas Normales';
                 $numeroCuotas='4-48';
             break;
-            case 'SI':
+            case 'S1':
                 $tipoPago='Cr&eacute;dito';
                 $tipoPagotildada='Crédito';
                 $tipoCuotas='Sin Inter&eacute;s';
@@ -215,18 +211,14 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
         }
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $order = $objectManager->create('Magento\Sales\Model\Order')->loadByIncrementId($result->buyOrder);
-        try {
+        $detorden=$this->obtenerDetalleOrden($order->getId());
+
+	    try {
             $emailSender = $objectManager->create('\Magento\Sales\Model\Order\Email\Sender\OrderSender');
             $emailSender->send($order);
         } catch (\Exception $e) {
-            $this->_logger->critical($e);
+            //$this->_logger->critical($e);
         }
-
-        // $payment = $order->getPayment();
-        // $payment->setAdditionalInformation('payment', 'TARJETA CR');
-        // $payment->save();
-        //$detorden=$this->obtenerDetalleOrden($order->getId());
-        
 
         $payResult = array(
             'description' => $this->title,
@@ -243,29 +235,9 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
                 'tipocuotas' => $tipoCuotas,
                 'numcuotas' => $numeroCuotas
             ),
-            'detalleOrder' => $order,
+            'detalleOrder' => $detorden,
             'objpay'=>$order
         );
-        $xpecDetallePago = array(
-            'description' => $this->title,
-            'paymenCodeResult' => $transactionResponse,
-            'date_accepted' => $result->transactionDate,
-            'buyOrder' => $result->buyOrder,
-            'authorizationCode' => $result->detailOutput->authorizationCode,
-            'cardNumber' => $result->cardDetail->cardNumber,
-            'amount' => $result->detailOutput->amount,
-            'sharesNumber' => $result->detailOutput->sharesNumber,
-            'paymenCodeResult' => $paymenCodeResult,
-            'detalle' => array(
-                'tipopago' => $tipoPago,
-                'tipocuotas' => $tipoCuotas,
-                'numcuotas' => $numeroCuotas
-            ),
-            'orderID' => $order->getId()
-        );
-        // $det = $objectManager->create('\Xpectrum\Detallepago\Model\Detallepago');
-        // $json = json_encode( $xpecDetallePago );
-        // $det->grabarDetalle($result->buyOrder,$json);
         $arraylog=array(
             'description' => $this->title,
             'paymenCodeResult' => $transactionResponse,
@@ -295,7 +267,7 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
             WHERE
                 parent_id='.$order->getId();
         $connection->query($sql);
-        //$this->logArray(array('Orden'=>$arraylog ));
+        $this->logArray(array('Orden'=>$arraylog ));
         return $payResult;
     }
     private function obtenerDetalleOrden($idorden){
@@ -303,36 +275,6 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
             $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
             $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
             $url=$storeManager->getStore()->getBaseUrl().'index.php/rest/V1/orders/'.$idorden;
-            $token = $this->_accesToken;
-            $httpHeaders = new \Zend\Http\Headers();
-            $httpHeaders->addHeaders([
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json'
-            ]);
-            
-            $request = new \Zend\Http\Request();
-            $request->setHeaders($httpHeaders);
-            $request->setMethod(\Zend\Http\Request::METHOD_GET);
-            $request->setUri($url);
-            $client = new \Zend\Http\Client();
-            $options = [
-                'adapter'   => 'Zend\Http\Client\Adapter\Curl',
-                'curloptions' => [CURLOPT_FOLLOWLOCATION => true]
-            ];
-            $client->setOptions($options);
-            $response = $client->send($request);
-            return $response;
-        }catch(Exception $err){
-            $this->logArray(array('error'=>$err->getMessage(),'idOrden'=>$idorder));
-            throw new Exception($err->getMessage());
-        }
-    }
-    private function obtenerItemsOrden($idorden){
-        try{
-            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-            $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
-            $url=$storeManager->getStore()->getBaseUrl().'index.php/rest/V1/orders/items/'.$idorden;
             $token = $this->_accesToken;
             $httpHeaders = new \Zend\Http\Headers();
             $httpHeaders->addHeaders([

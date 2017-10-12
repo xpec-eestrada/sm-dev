@@ -47,17 +47,12 @@ class Response extends \Magento\Framework\App\Action\Action
             $result = $this->webpay->transactionResult($token_ws);
             
             /* Pago realizado correctamente y aceptado por Webpay */
-            if (!empty($result->buyOrder) && $result->detailOutput->responseCode == 0) {
+            if (!empty($result->buyOrder) && ($result->VCI == 'TSY' || $result->VCI == '') && $result->detailOutput->responseCode == 0) {
 
                 $payData = $this->webpay->getPaidResult($result);
                 
                 $this->checkoutSession->setPaidFlag(1);
                 $this->checkoutSession->setHasPaidResult($payData);
-
-	    $order = $this->salesOrder->loadByIncrementId($this->checkoutSession->getLastRealOrderId());
-            $order->setState('processing')->setStatus('processing');
-            $order->save();
-
                 
                 $webPaySoap = new \WebPaySOAP($this->webpay->config);                
                 $webPaySoap->redirect($result->urlRedirection, array('token_ws' => $token_ws));
@@ -71,7 +66,7 @@ class Response extends \Magento\Framework\App\Action\Action
                 $date = new \DateTime($result->transactionDate);
                 $transactionDate = $date->format('d-m-Y H:i:s');
 
-///                $this->messageManager->addError('Le informamos que su orden ' . $result->buyOrder . ', realizada el ' . $transactionDate . ' termin&oacute; de forma inesperada (' . $responseDescription . ')');
+                $this->messageManager->addError('Le informamos que su orden ' . $result->buyOrder . ', realizada el ' . $transactionDate . ' termin&oacute; de forma inesperada (' . $responseDescription . ')');
                 $this->_redirect('checkout/onepage/failure/', array('_secure' => false));
             }
         } else {

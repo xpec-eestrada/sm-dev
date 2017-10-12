@@ -18,7 +18,7 @@ class Success extends \Magento\Framework\App\Action\Action
     /**
      * @var \Transbank\Webpay\Model\Webpay
      */
-    protected $webpay;    
+    protected $webpay;
 
     public function __construct(
         \Magento\Framework\App\Action\Context $context,        
@@ -26,7 +26,7 @@ class Success extends \Magento\Framework\App\Action\Action
         \Magento\Sales\Model\Order $salesOrder,
         \Transbank\Webpay\Model\Webpay $webpay
     ){
-        parent::__construct($context);        
+        parent::__construct($context);
         
         $this->checkoutSession = $checkoutSession;
         $this->salesOrder = $salesOrder;
@@ -36,21 +36,20 @@ class Success extends \Magento\Framework\App\Action\Action
     public function execute()
     {        
         $paidFlag = $this->checkoutSession->getPaidFlag();
-        $result = $this->checkoutSession->getHasPaidResult();
-        $incrementId = trim($this->checkoutSession->getLastRealOrderId());
-        $order = $this->salesOrder->loadByIncrementId($incrementId);
+        $order = $this->salesOrder->loadByIncrementId($this->checkoutSession->getLastRealOrderId());
         
-        if (!isset($paidFlag) || $paidFlag == '' || !isset($result['buyOrder']) || 
-                (isset($result['buyOrder']) && trim($result['buyOrder']) != $incrementId)) {
+        if (!isset($paidFlag) || $paidFlag == '') {
 
             $order->cancel()->setState(\Magento\Sales\Model\Order::STATE_CANCELED, true, 'Canceled')->save();
-            
+
+            $this->messageManager->addError('Estimado cliente, te informamos que el tiempo para tu compra ha expirado o fue cancelada por el usuario.<br/>');
             $this->_redirect('checkout/onepage/failure/', array('_secure' => false));
         } else {
             
-            //$order->setState('processing')->setStatus('processing'); 
-            //$order->save();
-            //$this->checkoutSession->unsPaidFlag();
+            $order->setState('processing')->setStatus('processing'); 
+            $order->save();
+
+            $this->checkoutSession->unsPaidFlag();
             $this->_redirect('checkout/onepage/success/', array('_secure' => false));
         }        
     }

@@ -1,10 +1,10 @@
 <?php
     $payResponse = $block->getPaymentDetails();
     $date_accepted = new \DateTime($payResponse['date_accepted']);
-    //$items=json_decode( $payResponse['itemsOrder']->getContent() );
+    
 ?>
 <?php if ($payResponse ==! 0) :?> 
-    <?php $obj = $payResponse['detalleOrder']; ?>
+    <?php $obj=json_decode( $payResponse['detalleOrder']->getContent() ); ?>
     <div class="page-title">
         <h1><?php echo $block->escapeHtml(__('Detalles del Pago.')) ?></h1>
     </div>
@@ -55,18 +55,20 @@
                 <td><b><?php echo $block->escapeHtml(__('Detalle de la Compra:')); ?></b></td>
                 <td>
                     <?php 
-                    echo '<table class="det-compra">';
+                    echo '<table>';
                     echo '<tr>
-                            <td><b>SKU</b></td>
-                            <td><b>'.$block->escapeHtml(__('Nombre del Producto')).'</b></td>
+                            <td>SKU</td>
+                            <td>'.$block->escapeHtml(__('Nombre del Producto')).'</td>
                         </tr>';
                     if(isset($obj)){
-                        foreach($obj->getItems() as $item){
-                            if($item->getPrice()>0){
-                                echo '<tr>';
-                                echo '<td>'.$item->getSku().'&nbsp;&nbsp;&nbsp;</td>';
-                                echo '<td>'.$item->getName().'</td>';
-                                echo '</tr>';
+                        if(is_array($obj->items)){
+                            foreach($obj->items as $item){
+                                if($item->price>0){
+                                    echo '<tr>';
+                                    echo '<td>'.$item->sku.'&nbsp;&nbsp;&nbsp;</td>';
+                                    echo '<td>'.$item->name.'</td>';
+                                    echo '</tr>';
+                                }
                             }
                         }
                     }
