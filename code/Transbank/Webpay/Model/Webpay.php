@@ -45,6 +45,8 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
 
     private $_detallepagoFactory;
 
+    private $loggerxpec;
+
     public function __construct(
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -72,6 +74,10 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
             $resourceCollection,
             $data
         );
+
+        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/xpec_webpay_order.log');
+        $this->loggerxpec = new \Zend\Log\Logger();
+        $this->loggerxpec->addWriter($writer);
         
         $this->checkoutSession = $checkoutSession;
         $this->_storeManager = $storeManager;        
@@ -219,7 +225,8 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
             $emailSender = $objectManager->create('\Magento\Sales\Model\Order\Email\Sender\OrderSender');
             $emailSender->send($order);
         } catch (\Exception $e) {
-            $this->_logger->critical($e);
+            $this->loggerxpec->info($e->getMessage());
+            //$this->_logger->critical($e);
         }
 
         // $payment = $order->getPayment();
@@ -295,7 +302,7 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
             WHERE
                 parent_id='.$order->getId();
         $connection->query($sql);
-        //$this->logArray(array('Orden'=>$arraylog ));
+        $this->loggerxpec->info(print_r(array('Orden'=>$arraylog ), true));
         return $payResult;
     }
     private function obtenerDetalleOrden($idorden){
@@ -324,7 +331,7 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
             $response = $client->send($request);
             return $response;
         }catch(Exception $err){
-            //$this->logArray(array('error'=>$err->getMessage(),'idOrden'=>$idorder));
+            $this->loggerxpec->info(print_r(array('error'=>$err->getMessage(),'idOrden'=>$idorder), true));
             throw new Exception($err->getMessage());
         }
     }
@@ -354,15 +361,8 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
             $response = $client->send($request);
             return $response;
         }catch(Exception $err){
-            //$this->logArray(array('error'=>$err->getMessage(),'idOrden'=>$idorder));
+            $this->loggerxpec->info(print_r(array('error'=>$err->getMessage(),'idOrden'=>$idorder), true));
             throw new Exception($err->getMessage());
         }
-    }
-    public function logArray($array, $mode = 'a'){
-        $pathFile = __DIR__ . '/../logs/order-' . date('Y-m-d') . '.txt';
-        $handle = fopen($pathFile, $mode);
-        fwrite($handle, print_r($array, true));
-        fwrite($handle, "\n");
-        fclose($handle);
     }
 }
