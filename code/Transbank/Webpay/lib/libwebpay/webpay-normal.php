@@ -172,8 +172,8 @@ class WebPayNormal
             $wsTransactionDetail->amount = $amount;
             $arraydetalle['amount']=$amount;
             $arraydefi['transactionDetails']=$arraydetalle;
-            $this->log(date('H:i:s') . ' - datos request initTransaction ');
-            $this->logArray($arraydefi);
+            //$this->log(date('H:i:s') . ' - datos request initTransaction ');
+            //$this->logArray($arraydefi);
 
             
             /*Se agrega al arreglo de tiendas*/
@@ -184,8 +184,8 @@ class WebPayNormal
                 array("wsInitTransactionInput" => $wsInitTransactionInput)
             );
             $xmlResponse = $this->soapClient->__getLastResponse();
-            $this->log(date('H:i:s') . ' - initTransaction request  - ' . $this->soapClient->__getLastResponse());
-            $this->log(date('H:i:s') . ' - initTransaction response - ' . $xmlResponse);
+            //$this->log(date('H:i:s') . ' - initTransaction request  - ' . $this->soapClient->__getLastResponse());
+            //$this->log(date('H:i:s') . ' - initTransaction response - ' . $xmlResponse);
 
             $soapValidation = new SoapValidation($xmlResponse, $this->config->getParam("WEBPAY_CERT"));
             $validationResult = $soapValidation->getValidationResult();
@@ -221,8 +221,8 @@ class WebPayNormal
 		
 		$xmlResponse = $this->soapClient->__getLastResponse();
         
-        $this->log(date('H:i:s') . ' - transactionResult request  - ' . $this->soapClient->__getLastRequest());
-        $this->log(date('H:i:s') . ' - transactionResult response - ' . $xmlResponse);
+        //$this->log(date('H:i:s') . ' - transactionResult request  - ' . $this->soapClient->__getLastRequest());
+        //$this->log(date('H:i:s') . ' - transactionResult response - ' . $xmlResponse);
 
 		$soapValidation = new SoapValidation($xmlResponse, $this->config->getParam("WEBPAY_CERT"));
 		$validationResult = $soapValidation->getValidationResult();
@@ -275,8 +275,8 @@ class WebPayNormal
 
 		$xmlResponse = $this->soapClient->__getLastResponse();
         
-        $this->log(date('H:i:s') . ' - acknowledgeTransaction request  - ' . $this->soapClient->__getLastRequest());
-        $this->log(date('H:i:s') . ' - acknowledgeTransaction response - ' . $xmlResponse);
+        //$this->log(date('H:i:s') . ' - acknowledgeTransaction request  - ' . $this->soapClient->__getLastRequest());
+        //$this->log(date('H:i:s') . ' - acknowledgeTransaction response - ' . $xmlResponse);
 
 		$soapValidation = new SoapValidation($xmlResponse, $this->config->getParam("WEBPAY_CERT"));
 		$validationResult = $soapValidation->getValidationResult();

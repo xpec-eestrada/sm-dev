@@ -324,7 +324,7 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
             $response = $client->send($request);
             return $response;
         }catch(Exception $err){
-            $this->logArray(array('error'=>$err->getMessage(),'idOrden'=>$idorder));
+            //$this->logArray(array('error'=>$err->getMessage(),'idOrden'=>$idorder));
             throw new Exception($err->getMessage());
         }
     }
@@ -354,7 +354,7 @@ class Webpay extends \Magento\Payment\Model\Method\AbstractMethod
             $response = $client->send($request);
             return $response;
         }catch(Exception $err){
-            $this->logArray(array('error'=>$err->getMessage(),'idOrden'=>$idorder));
+            //$this->logArray(array('error'=>$err->getMessage(),'idOrden'=>$idorder));
             throw new Exception($err->getMessage());
         }
     }
