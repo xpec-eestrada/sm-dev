@@ -216,12 +216,11 @@ define([
                 if( $('.catalog-product-view').length ){
                     if($('.swatch-select.genero_sm').length){
                         $('.swatch-select.genero_sm').val($('.swatch-select.genero_sm option').eq(1).attr('value'));
-                        
-                        $('<div class="content-xpecgenero"><div><span class="label">Genero</span></div><div><span class="value">'+$('.swatch-select.genero_sm option').eq(1).text()+'</span></div></div>').insertBefore('.product-info-main .product-add-form');
+                        $('<div class="content-xpecgenero"><div class="cont-xpec-lab" ><span class="label">Genero</span></div><div class="cont-xpec-val"><span class="value">'+$('.swatch-select.genero_sm option').eq(1).text()+'</span></div></div>').insertBefore('.product-info-main .product-add-form');
                     }
                     if($('.swatch-select.marca_sm').length){
                         $('.swatch-select.marca_sm').val($('.swatch-select.marca_sm option').eq(1).attr('value'));
-                        $('<div class="content-xpecmarca"><div><span class="label">Marca</span></div><div><span class="value">'+$('.swatch-select.marca_sm option').eq(1).text()+'</span></div></div>').insertBefore('.product-info-main .product-add-form');
+                        $('<div class="content-xpecmarca"><div class="cont-xpec-lab"><span class="label">Marca</span></div><div class="cont-xpec-val"><span class="value">'+$('.swatch-select.marca_sm option').eq(1).text()+'</span></div></div>').insertBefore('.product-info-main .product-add-form');
                     }
                 }
             } else {
