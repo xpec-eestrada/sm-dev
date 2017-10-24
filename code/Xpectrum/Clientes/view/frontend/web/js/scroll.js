@@ -5,9 +5,9 @@ require([
             $(window).scroll(function(e){
                 var scroll = $(window).scrollTop();
                 if(scroll>=55){
-                    $('.custom-header').addClass('header-fixed');
+                    $('.custom-header .header-bottom-custom').addClass('header-fixed');
                 }else{
-                    $('.custom-header').removeClass('header-fixed');
+                    $('.custom-header .header-bottom-custom').removeClass('header-fixed');
                 }
                 
             });
