@@ -214,14 +214,14 @@ define([
                 this._sortAttributes();
                 this._RenderControls();
                 if( $('.catalog-product-view').length ){
-                    if($('.swatch-select.marca_sm').length){
-                        $('.swatch-select.marca_sm').val($('.swatch-select.marca_sm option').eq(1).attr('value'));
-                        $('<div><div><span>Marca</span></div><div><span>'+$('.swatch-select.marca_sm option').eq(1).text()+'</span></div></div>').insertBefore('.product-info-main .box-inner1');
-                    }
                     if($('.swatch-select.genero_sm').length){
                         $('.swatch-select.genero_sm').val($('.swatch-select.genero_sm option').eq(1).attr('value'));
                         
-                        $('<div><div><span>Genero</span></div><div><span>'+$('.swatch-select.genero_sm option').eq(1).text()+'</span></div></div>').insertBefore('.product-info-main .box-inner1');
+                        $('<div class="content-xpecgenero"><div><span class="label">Genero</span></div><div><span class="value">'+$('.swatch-select.genero_sm option').eq(1).text()+'</span></div></div>').insertBefore('.product-info-main .product-add-form');
+                    }
+                    if($('.swatch-select.marca_sm').length){
+                        $('.swatch-select.marca_sm').val($('.swatch-select.marca_sm option').eq(1).attr('value'));
+                        $('<div class="content-xpecmarca"><div><span class="label">Marca</span></div><div><span class="value">'+$('.swatch-select.marca_sm option').eq(1).text()+'</span></div></div>').insertBefore('.product-info-main .product-add-form');
                     }
                 }
             } else {
