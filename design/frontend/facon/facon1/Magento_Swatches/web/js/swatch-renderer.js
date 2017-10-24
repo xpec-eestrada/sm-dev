@@ -216,9 +216,11 @@ define([
                 if( $('.catalog-product-view').length ){
                     if($('.swatch-select.marca_sm').length){
                         $('.swatch-select.marca_sm').val($('.swatch-select.marca_sm option').eq(1).attr('value'));
+                        $('.product-info-main .box-inner1').insertBefore('<div><div><span>Marca</span></div><div><span>'+$('.swatch-select.marca_sm option').eq(1).text()+'</span></div></div>');
                     }
                     if($('.swatch-select.genero_sm').length){
                         $('.swatch-select.genero_sm').val($('.swatch-select.genero_sm option').eq(1).attr('value'));
+                        $('.product-info-main .box-inner1').insertBefore('<div><div><span>Genero</span></div><div><span>'+$('.swatch-select.genero_sm option').eq(1).text()+'</span></div></div>');
                     }
                 }
             } else {
