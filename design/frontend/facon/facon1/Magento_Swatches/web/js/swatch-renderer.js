@@ -216,9 +216,11 @@ define([
                 if( $('.catalog-product-view').length ){
                     if($('.swatch-select.marca_sm').length){
                         $('.swatch-select.marca_sm').val($('.swatch-select.marca_sm option').eq(1).attr('value'));
+                        $('.swatch-select.marca_sm').trigger("change");
                     }
                     if($('.swatch-select.genero_sm').length){
                         $('.swatch-select.genero_sm').val($('.swatch-select.genero_sm option').eq(1).attr('value'));
+                        $('.swatch-select.genero_sm').trigger("change");
                     }
                 }
                 
