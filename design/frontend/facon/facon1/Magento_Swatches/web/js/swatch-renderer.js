@@ -939,7 +939,7 @@ define([
 
                     gallery.seek(1);
                 } else {
-                    if (typeof gallery.updateData !== "undefined") { 
+                    if (typeof gallery !== "undefined" && typeof gallery.updateData === 'function' && typeof gallery.updateData !== "undefined") { 
                         gallery.updateData(imagesToUpdate);
                         $(this.options.mediaGallerySelector).AddFotoramaVideoEvents();
                     }
