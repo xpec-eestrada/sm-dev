@@ -939,8 +939,11 @@ define([
 
                     gallery.seek(1);
                 } else {
-                    gallery.updateData(imagesToUpdate);
-                    $(this.options.mediaGallerySelector).AddFotoramaVideoEvents();
+                    if (typeof gallery.updateData !== "undefined") { 
+                        gallery.updateData(imagesToUpdate);
+                        $(this.options.mediaGallerySelector).AddFotoramaVideoEvents();
+                    }
+                    
                 }
             } else if (justAnImage && justAnImage.img) {
                 context.find('.product-image-photo').attr('src', justAnImage.img);
