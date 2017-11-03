@@ -142,5 +142,6 @@ return array (
     'Plazathemes_Themeoptions' => 1,
     'Transbank_Webpay' => 1,
     'Xpectrum_Clientes' => 1,
+    'Xpectrum_LocaleLatino' => 1,
   ),
 );
