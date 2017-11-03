@@ -57,22 +57,18 @@ class Layerednavigation extends \Magento\Framework\View\Element\Template
      */
     public function __construct(
         \Magento\Framework\Registry $registry,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility,
         \Magento\Framework\App\Http\Context $httpContext,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\Directory\Model\Currency $currency,
         Template\Context $context,
         array $data = []
     ) {
         $this->_registry = $registry;
-        $this->_scopeConfig = $scopeConfig;
         $this->_productCollectionFactory = $productCollectionFactory;
         $this->_catalogProductVisibility = $catalogProductVisibility;
         $this->_httpContext = $httpContext;
-        $this->_storeManager = $storeManager;
         $this->_productFactory = $productFactory;
         $this->_currency = $currency;
         parent::__construct($context, $data);
