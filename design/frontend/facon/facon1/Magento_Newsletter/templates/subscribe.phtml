@@ -55,7 +55,6 @@
 			autoSize	: true,
 			closeClick	: true,
 		});
-		console.log(jQuery.parseJSON($.mage.cookies.get('mage-messages')));
 		if($.mage.cookies.get('mage-messages').length>2){
 			var obj=jQuery.parseJSON($.mage.cookies.get('mage-messages'))[0];
 			var newstr = obj.text.replace(/\+/g, " ");
