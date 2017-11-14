@@ -24,6 +24,10 @@ class Format extends \Magento\Framework\Locale\Format{
     }
     public function getPriceFormat($localeCode = null, $currencyCode = null)
     {
+        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/xpec_locale.log');
+        $this->loggerxpec = new \Zend\Log\Logger();
+        $this->loggerxpec->addWriter($writer);
+
         $localeCode = $localeCode ?: $this->_localeResolver->getLocale();
         if ($currencyCode) {
             $currency = $this->currencyFactory->create()->load($currencyCode);
@@ -84,6 +88,8 @@ class Format extends \Magento\Framework\Locale\Format{
             'groupLength' => $group,
             'integerRequired' => $integerRequired,
         ];
+
+        $this->loggerxpec->info(print_r($result,true));
 
         return $result;
     }
