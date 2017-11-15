@@ -224,6 +224,10 @@ define([
                         $('.swatch-select.marca_sm').trigger('change');
                         $('<div class="content-xpecmarca"><div class="cont-xpec-lab"><span class="label">Marca</span></div><div class="cont-xpec-val"><span class="value">'+$('.swatch-select.marca_sm option').eq(1).text()+'</span></div></div>').insertBefore('.product-info-main .product-add-form');
                     }
+                    var index=187;
+                    if($("select[name='super_attribute["+index+"]']").length){
+                        $("select[name='super_attribute["+index+"]']").val($("select[name='super_attribute["+index+"]'] option").eq(1).attr('value'));
+                    }
                 }
             } else {
                 console.log('SwatchRenderer: No input data received');
