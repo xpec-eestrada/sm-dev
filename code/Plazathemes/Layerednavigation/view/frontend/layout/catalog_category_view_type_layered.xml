@@ -20,12 +20,12 @@
             <action method="setUsePriceSlider" ifconfig="ajaxlayerednavigation/general/price_slider">
                 <argument name="value" xsi:type="boolean">true</argument>
             </action>
-            <block class="Plazathemes\LayeredNavigation\Block\LayeredNavigation" name="layered.price.slider" as="layered_price_slider">
+            <block class="Plazathemes\Layerednavigation\Block\Layerednavigation" name="layered.price.slider" as="layered_price_slider">
                 <action method="setTemplate" ifconfig="ajaxlayerednavigation/general/enabled">
                     <argument name="template" xsi:type="string">Plazathemes_Layerednavigation::layer/price/priceslider.phtml</argument>
                 </action>
             </block>
-            <block class="Plazathemes\LayeredNavigation\Block\LayeredNavigation" name="layered.price.js" as="layered_price_js">
+            <block class="Plazathemes\Layerednavigation\Block\Layerednavigation" name="layered.price.js" as="layered_price_js">
                 <action method="setTemplate" ifconfig="ajaxlayerednavigation/general/enabled">
                     <argument name="template" xsi:type="string">Plazathemes_Layerednavigation::layer/price/js.phtml</argument>
                 </action>
@@ -45,7 +45,7 @@
         </referenceBlock>
 
         <referenceContainer name="page.wrapper">
-            <block class="Plazathemes\LayeredNavigation\Block\LayeredNavigation" name="layered.loading.background" as="layered_loading_background" after="-">
+            <block class="Plazathemes\Layerednavigation\Block\Layerednavigation" name="layered.loading.background" as="layered_loading_background" after="-">
                 <action method="setTemplate" ifconfig="ajaxlayerednavigation/general/enabled">
                     <argument name="template" xsi:type="string">Plazathemes_Layerednavigation::layerbackground.phtml</argument>
                 </action>

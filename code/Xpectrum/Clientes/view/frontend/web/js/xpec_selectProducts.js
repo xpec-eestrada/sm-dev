@@ -2,8 +2,15 @@ require([
     "jquery"
     ],function($){
         window.fnload=function(){
-            var ids=[187,188];
-            var labels=["Genero","Marca"];
+            var ids=[];
+            var labels=[];
+            if($('.xpec-select').length){
+                $.each($('.xpec-select'),function(index,element){
+                    ids[index]=$(this).val();
+                    labels[index]=$(this).attr('data-title');
+                });
+            }
+            
             if(window.swloadselect){
                 window.cont++;
             }

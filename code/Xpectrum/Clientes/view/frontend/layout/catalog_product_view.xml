@@ -3,5 +3,9 @@
     <head>
         <link src="Xpectrum_Clientes::js/xpec_selectProducts.js"/>
     </head>
-
+    <body>
+        <referenceContainer name="content.aside">
+            <block class="Xpectrum\Clientes\Block\DataAdicional" name="xpec.additionaldata" template="Xpectrum_Clientes::xpecaditionaldata.phtml" />
+        </referenceContainer>
+    </body>
 </page>

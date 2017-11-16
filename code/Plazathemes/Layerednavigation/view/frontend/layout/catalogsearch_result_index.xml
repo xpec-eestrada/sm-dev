@@ -45,7 +45,7 @@
         </referenceBlock>
 
         <referenceContainer name="page.wrapper">
-            <block class="Plazathemes\LayeredNavigation\Block\LayeredNavigation" name="layered.loading.background" as="layered_loading_background" after="-">
+            <block class="Plazathemes\Layerednavigation\Block\Layerednavigation" name="layered.loading.background" as="layered_loading_background" after="-">
                 <action method="setTemplate" ifconfig="ajaxlayerednavigation/general/enabled">
                     <argument name="template" xsi:type="string">Plazathemes_Layerednavigation::layerbackground.phtml</argument>
                 </action>
