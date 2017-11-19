@@ -1,8 +1,9 @@
 <?php 
-//echo 'miphtml: '.$block->getInfo(); 
 $arraydata=$block->getInfo();
+$childProduct=$block->getAttributesCustom();
 foreach($arraydata as $item){
-    ?><input class="xpec-select" type="hidden" value="<?php echo $item['id']; ?>" data-title="<?php echo $item['titulo']; ?>" data-code="<?php echo $item['code']; ?>" />
+    ?>
+        <input class="xpec-select" type="hidden" value="<?php echo $item['id']; ?>" data-title="<?php echo $item['titulo']; ?>" data-code="<?php echo $item['code']; ?>" />
     <?php
 }
 ?>
