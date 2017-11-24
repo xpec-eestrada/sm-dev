@@ -54,9 +54,7 @@ class DataAdicional extends \Magento\Framework\View\Element\Template{
         foreach($ids as $id){
             $childProduct = $objectManager->create('Magento\Catalog\Model\Product')->load($id);
             if($childProduct->isInStock() && $childProduct->isAvailable() && $childProduct->isSaleable() ){
-                echo '<pre>'.$childProduct->getData('talla_sm').'</pre>';
                 $sql = 'SELECT value FROM '.$toption.' WHERE option_id='.$childProduct->getData('talla_sm');
-
             }
 
             

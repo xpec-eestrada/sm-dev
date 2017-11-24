@@ -1,0 +1,10 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="url_rewrite_generator_product" xsi:type="object">Shreeji\UrlRewriteGenerator\Console\Command\UrlGenerateProduct</item>
+                <item name="url_rewrite_generator_category" xsi:type="object">Shreeji\UrlRewriteGenerator\Console\Command\UrlGenerateCategory</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

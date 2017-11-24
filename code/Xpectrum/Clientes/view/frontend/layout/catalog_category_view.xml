@@ -6,8 +6,11 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <body>
-
-    </body>
+    <head>
+        <link src="Xpectrum_Clientes::js/xpec_selectCategory.js"/>
+    </head>
     <move element="category.view.container" destination="container" before="row"/>
+    <referenceContainer name="content.aside">
+            <block class="Xpectrum\Clientes\Block\DataAdicional" name="xpec.additionaldata" template="Xpectrum_Clientes::xpecaditionaldata.phtml" />
+        </referenceContainer>
 </page>

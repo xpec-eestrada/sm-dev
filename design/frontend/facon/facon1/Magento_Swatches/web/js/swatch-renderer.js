@@ -213,28 +213,6 @@ define([
             if (this.options.jsonConfig !== '' && this.options.jsonSwatchConfig !== '') {
                 this._sortAttributes();
                 this._RenderControls();
-                if( $('.catalog-product-view').length ){
-                    if( $('.field.configurable').length ){
-                        $.each($('.field.configurable'),function(index,elements){
-                            //$(this).find('.label').attr('for');
-                        });
-
-                    }
-                //     if($('.swatch-select.genero_sm').length).
-                //         $('.swatch-select.genero_sm').val($('.swatch-select.genero_sm option').eq(1).attr('value'));
-                //         $('.swatch-select.genero_sm').trigger('change');
-                //         $('<div class="content-xpecgenero"><div class="cont-xpec-lab" ><span class="label">Genero</span></div><div class="cont-xpec-val"><span class="value">'+$('.swatch-select.genero_sm option').eq(1).text()+'</span></div></div>').insertBefore('.product-info-main .product-add-form');
-                //     }
-                //     if($('.swatch-select.marca_sm').length){
-                //         $('.swatch-select.marca_sm').val($('.swatch-select.marca_sm option').eq(1).attr('value'));
-                //         $('.swatch-select.marca_sm').trigger('change');
-                //         $('<div class="content-xpecmarca"><div class="cont-xpec-lab"><span class="label">Marca</span></div><div class="cont-xpec-val"><span class="value">'+$('.swatch-select.marca_sm option').eq(1).text()+'</span></div></div>').insertBefore('.product-info-main .product-add-form');
-                //     }
-                //     var index=187;
-                //     if($("select[name='super_attribute["+index+"]']").length){
-                //         $("select[name='super_attribute["+index+"]']").val($("select[name='super_attribute["+index+"]'] option").eq(1).attr('value'));
-                //     }
-                }
             } else {
                 console.log('SwatchRenderer: No input data received');
             }
