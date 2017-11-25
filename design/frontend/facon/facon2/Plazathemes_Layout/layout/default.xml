@@ -3,7 +3,7 @@
 
     <body>
 		<referenceContainer name="header.box">
-            <block class="Plazathemes\Layout\Block\Layout" name="lucian_header" cacheable="false" template="html/header.phtml" before="-">
+            <block class="Plazathemes\Layout\Block\Layout" name="lucian_header" template="html/header.phtml" before="-">
 				
                 <block class="Magento\Framework\View\Element\Html\Links" name="header.links">
                     <arguments>
