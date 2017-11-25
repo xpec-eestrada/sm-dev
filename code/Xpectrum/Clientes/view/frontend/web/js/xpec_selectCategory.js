@@ -9,7 +9,7 @@ require([
             if(window.swloadselect){
                 window.cont++;
             }
-            if(window.cont<10){
+            if(window.cont<2){
                 if( $('.field.configurable').length ){
                     window.swloadselect=true;
                     $.each($('.field.configurable'),function(index,element){
@@ -18,7 +18,7 @@ require([
                             $($select).val($($select).find('option').eq(1).attr('value'));
                             $($select).trigger('change');
                         }else{
-
+                            window.cont=0;
                         }
                     });
                 }
@@ -33,7 +33,6 @@ require([
                         }                        
                     });
                 }
-                
             }
         }
         window.swloadselect=false;

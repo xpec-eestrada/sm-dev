@@ -18,7 +18,6 @@ var pt_quickview = {
                     pt_quickview.showQuickViewBackground();
                 },
                 success     : function(data) {
-                    console.log(data);
                     if(data.product_info) {
                         $('#quickview-content').html(data.product_info).trigger('contentUpdated');
                     } else {
