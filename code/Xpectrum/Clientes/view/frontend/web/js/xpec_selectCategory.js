@@ -4,6 +4,12 @@ require([
         $(document).on('click','.btn-quickview',function(){
             window.swloadselect=false;
             window.cont=0;
+            $('.action.primary.tocart').css({'display':'block'});
+        });
+        $('body, html').on('change','.super-attribute-select',function(){
+            window.submitaddcar=true;
+            $('.action.primary.tocart').css({'display':'block'});
+            validacionPrecio();
         });
         window.fnload=function(){
             if(window.swloadselect){
@@ -35,15 +41,47 @@ require([
                 }
             }
         }
+        window.submitaddcar=true;
         window.swloadselect=false;
         window.cont=0;
         $(document).ready(function() {
             window.fnload();
             $(window).scroll(function(e){
+                validacionPrecio();
                 window.fnload();
             });
             $('body').mouseover(function(){
+                validacionPrecio();
                 window.fnload();
             });
+            $('body, html').on('submit','#product_addtocart_form',function(e){
+                if(!window.submitaddcar){
+                    e.preventDefault();
+                }else{
+                    window.submitaddcar=true;
+                    validacionPrecio();
+                    if(!window.submitaddcar){
+                        e.preventDefault();
+                    }
+                }
+            });
         });
+        function validacionPrecio(){
+            if( $('.special-price').length ){
+                var tmp = $('.special-price').find('.price-wrapper span').html().split('$');
+                var valor=  parseInt(tmp[1].replace('.','')  );
+                if(valor<=1990){
+                    window.submitaddcar=false;
+                    $('.action.primary.tocart').css({'display':'none'});
+                }
+            }else{
+                if($('.price-final_price').length){
+                    var valor=  parseInt($('.price-final_price').find('.price-wrapper ').attr('data-price-amount'));
+                    if(valor<=1990){
+                        window.submitaddcar=false;
+                        $('.action.primary.tocart').css({'display':'none'});
+                    }
+                }
+            }
+        }
     });

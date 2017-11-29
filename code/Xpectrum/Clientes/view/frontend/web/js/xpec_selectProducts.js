@@ -43,13 +43,50 @@ require([
         }
         window.swloadselect=false;
         window.cont=0;
+        window.submitaddcar=true;
         $(document).ready(function() {
             window.fnload();
             $(window).scroll(function(e){
+                validacionPrecio();
                 window.fnload();
             });
             $('body').mouseover(function(){
+                validacionPrecio();
                 window.fnload();
             });
+            $('body, html').on('change','.super-attribute-select',function(){
+                window.submitaddcar=true;
+                $('.action.primary.tocart').css({'display':'block'});
+                validacionPrecio();
+            });
+            $('#product_addtocart_form').submit(function(e){
+                if(!window.submitaddcar){
+                    e.preventDefault();
+                }else{
+                    window.submitaddcar=true;
+                    validacionPrecio();
+                    if(!window.submitaddcar){
+                        e.preventDefault();
+                    }
+                }
+            });
         });
+        function validacionPrecio(){
+            if( $('.special-price').length ){
+                var tmp = $('.special-price').find('.price-wrapper span').html().split('$');
+                var valor=  parseInt(tmp[1].replace('.','')  );
+                if(valor<=1990){
+                    window.submitaddcar=false;
+                    $('.action.primary.tocart').css({'display':'none'});
+                }
+            }else{
+                if($('.price-final_price').length){
+                    var valor=  parseInt($('.price-final_price').find('.price-wrapper ').attr('data-price-amount'));
+                    if(valor<=1990){
+                        window.submitaddcar=false;
+                        $('.action.primary.tocart').css({'display':'none'});
+                    }
+                }
+            }
+        }
     });
