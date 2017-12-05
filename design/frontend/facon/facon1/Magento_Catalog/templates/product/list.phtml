@@ -102,7 +102,7 @@ $productModel = $objectManager->get('Magento\Catalog\Model\Product');
 												<?php echo $block->getBlockHtml('formkey')?>
 												<button type="submit"
 														title="<?php echo $block->escapeHtml(__('Add to Cart')); ?>"
-														class="action tocart">
+														class="action tocart xpec-add-to-cart">
 													<span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
 												</button>
 											</form>
@@ -399,7 +399,7 @@ $productModel = $objectManager->get('Magento\Catalog\Model\Product');
 														<?php echo $block->getBlockHtml('formkey')?>
 														<button type="submit"
 																title="<?php echo $block->escapeHtml(__('Add to Cart')); ?>"
-																class="action tocart">
+																class="action tocart xpec-add-to-cart">
 															<span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
 														</button>
 													</form>
@@ -462,3 +462,78 @@ $productModel = $objectManager->get('Magento\Catalog\Model\Product');
 	endif;
 	?>
 <?php endif; ?>
+<script>
+require([
+    "jquery"
+], function($){
+    $(document).ready(function($) {
+
+		window.fnproductzero=function(){
+			if($('.product-items').length){
+				$.each($('.product-items'),function(index,element){
+					var $element=$(element);
+					//console.log(element);
+					//xpec-add-to-cart
+					if($element.find('.special-price').length){
+						var $special=$element.find('.special-price');
+						var tmp = $special.find('.price-wrapper span').html().split('$');
+						var valor=  parseInt(tmp[1].replace('.','')  );
+						if(valor<=1990){
+							$element.find('.xpec-add-to-cart');
+							//console.log($element.find('.xpec-add-to-cart'));
+							//window.submitaddcar=false;
+							//$('.action.primary.tocart').css({'display':'none'});
+						}
+					}else{
+						if($element.find('.price-final_price').length){
+							var $price=$element.find('.price-final_price');
+							var valor = parseInt($price.find('.price-wrapper ').attr('data-price-amount'));
+							if(valor<=1990){
+								if($element.find('.xpec-add-to-cart').length){
+									console.log( $element.find() );
+									
+									console.log("reload");
+									$element.find('.xpec-add-to-cart').parents('.actions').css({'left':'76%'});
+									$element.find('.xpec-add-to-cart').parents('.actions').addClass('xpec-actions-buttons');
+									$element.find('.xpec-add-to-cart').remove();
+									// console.log($element.find('.actions').find('button').length);
+									// $element.find('.actions').find('button').css({'width':'100%'});
+									// $element.find('.actions').find('button').find('span').css({'width':'100%','text-align':'center'});
+								}
+							}
+						}
+					}
+					
+					// if( $('.special-price').length ){
+					// 	var tmp = $('.special-price').find('.price-wrapper span').html().split('$');
+					// 	var valor=  parseInt(tmp[1].replace('.','')  );
+					// 	if(valor<=1990){
+					// 		window.submitaddcar=false;
+					// 		$('.action.primary.tocart').css({'display':'none'});
+					// 	}
+					// }else{
+					// 	if($('.price-final_price').length){
+					// 		var valor=  parseInt($('.price-final_price').find('.price-wrapper ').attr('data-price-amount'));
+					// 		if(valor<=1990){
+					// 			window.submitaddcar=false;
+					// 			$('.action.primary.tocart').css({'display':'none'});
+					// 		}
+					// 	}
+					// }
+				});
+				
+			}
+			
+
+			
+        }
+		window.fnproductzero();
+		// $(window).scroll(function(e){
+		// 	window.fnproductzero();
+		// });
+		// $('body').mouseover(function(){
+		// 	window.fnproductzero();
+		// });
+    });
+});
+</script>

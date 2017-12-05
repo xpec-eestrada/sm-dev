@@ -18,7 +18,6 @@ var pt_ajax_layer = {
                     pt_ajax_layer.showBackGround();
                 },
                 success     : function(data) {
-                    console.log(data);
                     if (data.productlist) {
                         $('.category-products').html(data.productlist).trigger('contentUpdated');
                     }
