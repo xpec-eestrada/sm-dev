@@ -148,7 +148,7 @@ class WebPayNormal
 
     public function initTransaction($amount, $sessionId="", $ordenCompra="0", $urlFinal){
         try{
-
+            $amount=number_format($amount,0,'','');
             $tipotrans=$this->config->getParam("TIPO_TRANS");
             $error = array();
             $arraydefi=array();
