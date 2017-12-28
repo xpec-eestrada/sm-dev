@@ -4,3 +4,6 @@
 .wishlist-index-index .price-as-configured{
     display: none;
 }
+.form-wishlist-items button[data-role="all-tocart"]{
+    display:none;
+}
